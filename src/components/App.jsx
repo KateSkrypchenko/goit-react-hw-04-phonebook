@@ -10,7 +10,7 @@ import { ContactList } from 'components/ContactList/ContactList';
 
 export const App = () => {
   const [contacts, setContacts] = useState(
-    () => JSON.parse(window.localStorage.getItem('contacts')) ?? ''
+    () => JSON.parse(window.localStorage.getItem('contacts')) ?? []
   );
   const [filter, setFilter] = useState('');
 
@@ -22,7 +22,7 @@ export const App = () => {
     const isIncludesName = contacts.some(
       contact => contact.name.toLowerCase() === name.toLowerCase()
     );
-
+    console.log(isIncludesName);
     if (!isIncludesName) {
       setContacts(prevState => {
         const contact = {

@@ -19,7 +19,7 @@ export const App = () => {
   }, [contacts]);
 
   const createContactItem = ({ name, number }) => {
-    const isIncludesName = contacts.some(
+    const isIncludesName = contacts.find(
       contact => contact.name.toLowerCase() === name.toLowerCase()
     );
     console.log(isIncludesName);

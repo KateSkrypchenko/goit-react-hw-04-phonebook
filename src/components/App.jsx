@@ -9,9 +9,10 @@ import { Filter } from 'components/Filter/Filter';
 import { ContactList } from 'components/ContactList/ContactList';
 
 export const App = () => {
-  const [contacts, setContacts] = useState(
-    () => JSON.parse(window.localStorage.getItem('contacts')) ?? []
-  );
+  const [contacts, setContacts] = useState(() => {
+    const contacts = JSON.parse(window.localStorage.getItem('contacts'));
+    return contacts ? contacts : [];
+  });
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
@@ -19,10 +20,9 @@ export const App = () => {
   }, [contacts]);
 
   const createContactItem = ({ name, number }) => {
-    const isIncludesName = contacts.find(
+    const isIncludesName = contacts.some(
       contact => contact.name.toLowerCase() === name.toLowerCase()
     );
-    console.log(isIncludesName);
     if (!isIncludesName) {
       setContacts(prevState => {
         const contact = {
